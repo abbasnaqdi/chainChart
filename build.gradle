@@ -1,0 +1,34 @@
+buildscript {
+    ext {
+        minV = 14
+        targetV = 30
+        vCode = 1
+        vName = '0.9.0'
+        pkg = "com.naqdi.sample"
+
+        gradleV = '4.1.0'
+        kotlinV = '1.4.10'
+        materialV = '1.2.1'
+    }
+
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradleV"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinV"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

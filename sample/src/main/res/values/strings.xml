@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">Chart</string>
+  <string name="generate_fake_graph">Generate Fake Graph</string>
+</resources>

@@ -1,24 +1,20 @@
-##### `Node Line Chart`
+##### `Chain Chart`
 
 [![](https://jitpack.io/v/oky2abbas/chain-chart.svg)](https://jitpack.io/#oky2abbas/chain-chart)
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/oky2abbas/chain-chart)
 [![API](https://img.shields.io/badge/API-17%2B-blue.svg?style=flat)](https://github.com/oky2abbas/chain-chart)
 
-<<<<<<< HEAD
-**Chain Chart X is a library for displaying chain and line charts, the idea of this library came to my mind from Google Analytics.**
-=======
-**Chain Chart View** is a 
+**Chain Chart is a library for displaying chain and line charts, the idea of this library came to my mind from Google Analytics.**
+
+**Bitcoin (BTC) [![Donate](https://img.shields.io/badge/Donate-green)](https://idpay.ir/oky2abbas): `1HPZyUP9EJZi2S87QrvCDrE47qRV4i5Fze`**
+
+**Ethereum (ETH) [![Donate](https://img.shields.io/badge/Donate-green)](https://idpay.ir/oky2abbas): `0x4a4b0A26Eb31e9152653E4C08bCF10f04a0A02a9`**
+
+**Tron (TRX) [![Donate](https://img.shields.io/badge/Donate-green)](https://idpay.ir/oky2abbas): `TAewZVAD4eKjPo9uJ5TesxJUrXiBtVATsK`**
+
+
 
 <img src="screenshots/shot_1.png">
->>>>>>> abbd81de27ad957c269427823fad421db395f2ca
-
-[![Donate](https://img.shields.io/badge/Donate-green)](https://idpay.ir/naqdi)
-
-**Bitcoin (BTC) Donate: `1HPZyUP9EJZi2S87QrvCDrE47qRV4i5Fze`**
-
-**Ethereum (ETH) Donate: `0x4a4b0A26Eb31e9152653E4C08bCF10f04a0A02a9`**
-
-**Tron (TRX) Donate: `TAewZVAD4eKjPo9uJ5TesxJUrXiBtVATsK`**
 
 
 
@@ -40,78 +36,63 @@ Add the dependency :
 
 ```java
 dependencies {
-    implementation 'com.github.oky2abbas:chain-chart:0.9.0'
+    implementation 'com.github.oky2abbas:chain-chart:0.9.1'
 }
 ```
+
+
 
 ##### Simple API (default) :
 
 In `XML` :
 
 ```XML 
-
-  <com.naqdi.chart.ChainChartView
-    android:id="@+id/chainChartView"
-    android:layout_width="match_parent"
+<com.naqdi.chart.ChainChartView
+		android:id="@+id/chainChartView"
+		android:layout_width="match_parent"
     android:layout_height="300dp"
     android:layout_gravity="center"/>
-
 ```
 
 In `Code` :
 
 ```java
-
-  
-  val intervalList = listOf("Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+	val intervalList = listOf("Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
   val rangeList = listOf("0-1K", "100K", "200K", "500K")
   val lineList = arrayListOf<Line>().apply {
     add(Line("Line 1", Color.BLUE, listOf(10f, 280f, 88f, 70f, 23f, 33f)))
     add(Line("Line 2", Color.RED, listOf(300f, 40f, 38f, 180f, 403f, 201f)))
   }
 
-  setData(lineList, intervalList, rangeList)
-                
-
+  chainChartView.setData(lineList, intervalList, rangeList)
 ```
 
 ##### Customazation :
 
 ```XML 
-
-    app:cc_line_size="3dp"
-    app:cc_node_size="3sp"
-    app:cc_text_size="11sp" 
-    app:cc_font_family="@font/font_name"
-
+		app:cc_line_size="3dp"										//size as dp
+		app:cc_node_size="3dp"										//size as dp
+    app:cc_text_size="11sp"										//size as sp
+		app:cc_text_color="#000000"								//color as int or resource id
+    app:cc_font_family="@font/font_name"			//font as resource id
 ```
 
 In `Code` :
 
 ```java
-
-
-  chainChartView.setLineSize(3f)
-  chainChartView.setTextSize(13f)
-  chainChartView.setTextColor(Color.GRAY)
-  chainChartView.setNodeSize(8F)
-  chainChartView.setFontFamily(Typeface.DEFAULT_BOLD)
-           
-
+	chainChartView.setLineSize(3f)							// size as dp
+ 	chainChartView.setNodeSize(8F) 							//size as dp
+  chainChartView.setTextSize(11f)							// size as sp
+  chainChartView.setTextColor(Color.GRAY) 		//color as int
+  chainChartView.setFontFamily(font_family)		//font as typeface
 ```
 
-##### FAQ :
-
-###### Need more help?
-
-- [Check out the classes in this folder](sample/src/main/java/com/naqdi/sample)
-
-##### License
+##### Licenses
 
 ```
 MIT License
 
-Copyright (c) 2020  amir abbas naqdi
+Copyright (c) 2021  amir abbas naqdi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

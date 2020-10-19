@@ -18,6 +18,6 @@ internal fun List<Float>.closestValue(value: Float): Float? {
     return minByOrNull { kotlin.math.abs(value - it) }
 }
 
-internal fun List<Line>.getMaxGraph(): Line? {
+internal fun List<Line>.getMaxLine(): Line? {
     return maxByOrNull { it.nodeList.size }
 }

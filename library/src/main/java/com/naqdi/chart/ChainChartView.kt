@@ -202,7 +202,7 @@ class ChainChartView @JvmOverloads constructor(
           This code finds the largest graph based on the number of nodes,
            then divides it based on this graph.
          */
-        lineList.getMaxGraph()?.let {
+        lineList.getMaxLine()?.let {
             for (index in it.nodeList.indices) {
                 splitList.add(it.getGraphX(index))
             }

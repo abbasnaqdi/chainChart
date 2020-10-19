@@ -14,8 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        app:cc_line_size="3dp"
-        app:cc_node_size="3sp" />
+/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnGenerate"

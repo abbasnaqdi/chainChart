@@ -8,7 +8,7 @@ object FakeGenerator {
     val rangeList = listOf("0-1K", "100K", "200K", "500K")
 
     fun generate(): List<Line> {
-        val graphList = arrayListOf<Line>()
+        val lineList = arrayListOf<Line>()
 
         for (i in (1..(1..3).random())) {
             val nodeList = arrayListOf<Float>()
@@ -17,14 +17,14 @@ object FakeGenerator {
                 nodeList.add((1..500).random().toFloat())
             }
 
-            graphList.add(
+            lineList.add(
                 Line(
                     "Node ${(1..9).random()}", getColorValue(i), nodeList
                 )
             )
         }
 
-        return graphList
+        return lineList
     }
 
     private fun getColorValue(index: Int) = when (index) {

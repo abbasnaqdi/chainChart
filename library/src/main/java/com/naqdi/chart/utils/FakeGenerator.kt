@@ -1,14 +1,14 @@
-package com.oky2abbas.library.utils
+package com.naqdi.chart.utils
 
 import android.graphics.Color
-import com.oky2abbas.library.model.Graph
+import com.naqdi.chart.model.Line
 
 object FakeGenerator {
     val nameList = listOf("Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-    val rangeList = listOf("0", "100", "200", "500")
+    val rangeList = listOf("0-1K", "100K", "200K", "500K")
 
-    fun generate(): List<Graph> {
-        val graphList = arrayListOf<Graph>()
+    fun generate(): List<Line> {
+        val graphList = arrayListOf<Line>()
 
         for (i in (1..(1..3).random())) {
             val nodeList = arrayListOf<Float>()
@@ -18,7 +18,7 @@ object FakeGenerator {
             }
 
             graphList.add(
-                Graph(
+                Line(
                     "Node ${(1..9).random()}", getColorValue(i), nodeList
                 )
             )

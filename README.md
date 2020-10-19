@@ -1,13 +1,13 @@
 ##### `Node Line Chart`
 
-[![](https://jitpack.io/v/oky2abbas/reactor.svg)](https://jitpack.io/#dfmAbbas/reactor)
-[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/oky2abbas/reactor)
-[![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)](https://github.com/oky2abbas/reactor)
+[![](https://jitpack.io/v/naqdi/reactor.svg)](https://jitpack.io/#dfmAbbas/reactor)
+[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/naqdi/reactor)
+[![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)](https://github.com/naqdi/reactor)
 
 **Chain Chart View** is a 
 
 
-[![Donate](https://img.shields.io/badge/Donate-green)](https://idpay.ir/oky2abbas)
+[![Donate](https://img.shields.io/badge/Donate-green)](https://idpay.ir/naqdi)
 
 **Bitcoin (BTC) Donate: `bc1qhgvnx2nfzr0qep5fnsevyyn59k32wpe7q0c7nh`**
 

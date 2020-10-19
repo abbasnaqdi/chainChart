@@ -1,8 +1,9 @@
-package com.oky2abbas.library.ext
+package com.naqdi.chart.utils
 
 import android.content.Context
+import android.content.res.Resources
 import android.util.TypedValue
-import com.oky2abbas.library.model.Graph
+import com.naqdi.chart.model.Line
 
 
 internal fun Context.dpToPx(dp: Float) = TypedValue.applyDimension(
@@ -14,9 +15,9 @@ internal fun String.getSize(): Float {
 }
 
 internal fun List<Float>.closestValue(value: Float): Float? {
-    return minBy { kotlin.math.abs(value - it) }
+    return minByOrNull { kotlin.math.abs(value - it) }
 }
 
-internal fun List<Graph>.getMaxGraph(): Graph? {
-    return maxBy { it.nodeList.size }
+internal fun List<Line>.getMaxGraph(): Line? {
+    return maxByOrNull { it.nodeList.size }
 }

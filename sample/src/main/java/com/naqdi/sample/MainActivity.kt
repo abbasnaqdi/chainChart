@@ -1,9 +1,7 @@
 package com.naqdi.sample
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.naqdi.chart.model.Line
 import com.naqdi.chart.utils.FakeGenerator
 import kotlinx.android.synthetic.main.main_activity.*
 

@@ -3,7 +3,7 @@ buildscript {
         minV = 17
         targetV = 30
         vCode = 1
-        vName = '0.9.0'
+        vName = '0.9.1'
         pkg = "com.naqdi.sample"
 
         gradleV = '4.1.0'

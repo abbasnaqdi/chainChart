@@ -19,7 +19,7 @@ object FakeGenerator {
 
             lineList.add(
                 Line(
-                    "Node ${(1..9).random()}", getColorValue(i), nodeList
+                    "Line ${(1..9).random()}", getColorValue(i), nodeList
                 )
             )
         }

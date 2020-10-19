@@ -1,20 +1,21 @@
 buildscript {
     ext {
-        minV = 14
+        minV = 17
         targetV = 30
         vCode = 1
-        vName = '0.9.0'
+        vName = '0.9.1'
         pkg = "com.naqdi.sample"
 
         gradleV = '4.1.0'
         kotlinV = '1.4.10'
         materialV = '1.2.1'
+        appcompatV = '1.2.0'
     }
 
     repositories {
+        maven { url 'https://maven.google.com' }
         google()
         jcenter()
-        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleV"
@@ -24,6 +25,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://maven.google.com' }
         google()
         jcenter()
     }

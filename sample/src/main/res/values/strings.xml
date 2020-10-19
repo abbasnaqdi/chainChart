@@ -1,4 +1,4 @@
 <resources>
-  <string name="app_name">Chart</string>
-  <string name="generate_fake_graph">Generate Fake Graph</string>
+    <string name="app_name" translatable="false">Chart</string>
+    <string name="generate_fake_random_chart" translatable="false">Generate Fake Random Chart</string>
 </resources>

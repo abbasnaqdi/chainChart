@@ -1,12 +1,18 @@
 ##### `Node Line Chart`
 
-[![](https://jitpack.io/v/oky2abbas/reactor.svg)](https://jitpack.io/#dfmAbbas/reactor)
-[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/oky2abbas/reactor)
-[![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)](https://github.com/oky2abbas/reactor)
+[![](https://jitpack.io/v/oky2abbas/chain-chart.svg)](https://jitpack.io/#oky2abbas/chain-chart)
+[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/oky2abbas/chain-chart)
+[![API](https://img.shields.io/badge/API-17%2B-blue.svg?style=flat)](https://github.com/oky2abbas/chain-chart)
 
+<<<<<<< HEAD
 **Chain Chart X is a library for displaying chain and line charts, the idea of this library came to my mind from Google Analytics.**
+=======
+**Chain Chart View** is a 
 
-[![Donate](https://img.shields.io/badge/Donate-green)](https://idpay.ir/oky2abbas)
+<img src="screenshots/shot_1.png">
+>>>>>>> abbd81de27ad957c269427823fad421db395f2ca
+
+[![Donate](https://img.shields.io/badge/Donate-green)](https://idpay.ir/naqdi)
 
 **Bitcoin (BTC) Donate: `1HPZyUP9EJZi2S87QrvCDrE47qRV4i5Fze`**
 
@@ -19,7 +25,7 @@
 
 ##### Getting Started :
 
-Add to your root build.gradle :Ï
+Add to your root build.gradle :
 
 ```java
 allprojects {
@@ -34,7 +40,7 @@ Add the dependency :
 
 ```java
 dependencies {
-    implementation 'com.github.naqdi:chart:1.0.0'
+    implementation 'com.github.oky2abbas:chain-chart:0.9.0'
 }
 ```
 
@@ -44,11 +50,53 @@ In `XML` :
 
 ```XML 
 
+  <com.naqdi.chart.ChainChartView
+    android:id="@+id/chainChartView"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_gravity="center"/>
+
 ```
 
 In `Code` :
 
 ```java
+
+  
+  val intervalList = listOf("Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+  val rangeList = listOf("0-1K", "100K", "200K", "500K")
+  val lineList = arrayListOf<Line>().apply {
+    add(Line("Line 1", Color.BLUE, listOf(10f, 280f, 88f, 70f, 23f, 33f)))
+    add(Line("Line 2", Color.RED, listOf(300f, 40f, 38f, 180f, 403f, 201f)))
+  }
+
+  setData(lineList, intervalList, rangeList)
+                
+
+```
+
+##### Customazation :
+
+```XML 
+
+    app:cc_line_size="3dp"
+    app:cc_node_size="3sp"
+    app:cc_text_size="11sp" 
+    app:cc_font_family="@font/font_name"
+
+```
+
+In `Code` :
+
+```java
+
+
+  chainChartView.setLineSize(3f)
+  chainChartView.setTextSize(13f)
+  chainChartView.setTextColor(Color.GRAY)
+  chainChartView.setNodeSize(8F)
+  chainChartView.setFontFamily(Typeface.DEFAULT_BOLD)
+           
 
 ```
 

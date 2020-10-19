@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="cc_line">
+        <attr name="cc_text_size" format="dimension" />
+        <attr name="cc_line_size" format="dimension" />
+        <attr name="cc_node_size" format="dimension" />
+        <attr name="cc_text_color" format="color|reference" />
+        <attr name="cc_font_family" format="string" />
+    </declare-styleable>
+
+</resources>

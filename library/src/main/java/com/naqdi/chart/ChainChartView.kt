@@ -1,47 +1,34 @@
-package com.oky2abbas.library.view
+package com.naqdi.chart
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.DashPathEffect
-import android.graphics.Paint
+import android.graphics.*
+import android.graphics.Paint.ANTI_ALIAS_FLAG
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import com.oky2abbas.library.ext.closestValue
-import com.oky2abbas.library.ext.dpToPx
-import com.oky2abbas.library.ext.getMaxGraph
-import com.oky2abbas.library.ext.getSize
-import com.oky2abbas.library.model.Graph
-import com.oky2abbas.library.utils.FakeGenerator
+import androidx.core.content.res.ResourcesCompat
+import com.naqdi.chart.model.Line
+import com.naqdi.chart.utils.*
 
-/*
-  @author: abbas naqdi (naqdi)
-  - All the following code was written by @naqdi without any copying
-  - Use of this source code is not permitted without permission
-  - This source was sent to https://zelkaa.com
- */
 
 class ChainChartView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0
 ) : View(
     context, attrs, defStyleAttr
 ) {
-
-    private var graphList = listOf<Graph>()
-    private var nameList = listOf<String>()
+    private var lineList = listOf<Line>()
+    private var titleList = listOf<String>()
     private var rangeList = listOf<String>()
     private val splitList = arrayListOf<Float>()
+
 
     private val circleRadius = 9f
     private var selectedX = 0f
     private val minLeftMargin = 10f
     private var maxLeftMargin = minLeftMargin * 2
-    private val topMargin = 30f
-    private val bottomMargin = 30f
-    private val textSize = 11f
+    private val topBottomMargin = 30f
     private var maxGraphTitleSize = 50f
     private var maxNode = 0f
 
@@ -49,67 +36,142 @@ class ChainChartView @JvmOverloads constructor(
     private var widthVal = 0f
     private var heightVal = 0f
 
-    private val circlePaint = Paint().apply {
-        style = Paint.Style.FILL
-        isAntiAlias = true
-    }
 
-    private val linePaint = Paint().apply {
-        style = Paint.Style.FILL
+    private val nodePaint = Paint(ANTI_ALIAS_FLAG).apply {
         isAntiAlias = true
+        style = Paint.Style.FILL_AND_STROKE
         strokeCap = Paint.Cap.ROUND
-        strokeWidth = 3f
     }
 
-    private val badgePaint = Paint().apply {
+    private val linePaint = Paint(ANTI_ALIAS_FLAG).apply {
+        isAntiAlias = true
         style = Paint.Style.FILL
-        isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
-        strokeWidth = 5f
     }
 
-    private val liteLinePaint = Paint().apply {
+    private val badgePaint = Paint(ANTI_ALIAS_FLAG).apply {
+        isAntiAlias = true
+        style = Paint.Style.FILL_AND_STROKE
+        strokeCap = Paint.Cap.ROUND
+        strokeWidth = context.dpToPx(1f)
+    }
+
+    private val liteLinePaint = Paint(ANTI_ALIAS_FLAG).apply {
+        isAntiAlias = true
         style = Paint.Style.FILL
-        isAntiAlias = true
         strokeCap = Paint.Cap.ROUND
-        strokeWidth = 0.09f
+        color = 0x10000000
     }
 
-    private val strokeLinePaint = Paint().apply {
-        style = Paint.Style.STROKE
+    private val strokeLinePaint = Paint(ANTI_ALIAS_FLAG).apply {
         isAntiAlias = true
-        strokeWidth = 4f
+        style = Paint.Style.FILL
         pathEffect = DashPathEffect(floatArrayOf(10f, 12f), 0f)
-        strokeCap = Paint.Cap.BUTT
-        color = 0x20000000
+        strokeCap = Paint.Cap.ROUND
+        color = 0x40000000
     }
 
-    private val textPaint = TextPaint().apply {
+    private val textPaint = TextPaint(ANTI_ALIAS_FLAG).apply {
         isAntiAlias = true
-        textSize = getContext().dpToPx(textSize)
-        color = Color.BLACK
+        style = Paint.Style.FILL
+        strokeCap = Paint.Cap.ROUND
     }
 
-    private val textCenterPaint = TextPaint().apply {
+    private val textCenterPaint = TextPaint(ANTI_ALIAS_FLAG).apply {
         isAntiAlias = true
-        textSize = getContext().dpToPx(textSize)
-        color = Color.BLACK
+        style = Paint.Style.FILL
+        strokeCap = Paint.Cap.ROUND
         textAlign = Paint.Align.CENTER
     }
 
-    /*
-     The client can use this method to set data in graphs
-     Note: The source instance of using this method is available
-     in the `FakeGenerator` object.
-     */
+    init {
+        val typeArray = context.theme.obtainStyledAttributes(
+            attrs, R.styleable.cc_line,
+            0, 0
+        )
+
+        try {
+            typeArray.getDimension(
+                R.styleable.cc_line_cc_text_size,
+                context.dpToPx(11f)
+            ).let {
+                textCenterPaint.textSize = it
+                textPaint.textSize = it
+            }
+
+            typeArray.getDimension(
+                R.styleable.cc_line_cc_line_size,
+                context.dpToPx(1f)
+            ).let {
+                linePaint.strokeWidth = it
+            }
+
+            typeArray.getDimension(
+                R.styleable.cc_line_cc_node_size,
+                context.dpToPx(1f)
+            ).let {
+                nodePaint.strokeWidth = it
+            }
+
+            typeArray.getColor(
+                R.styleable.cc_line_cc_text_color,
+                Color.BLACK
+            ).let {
+                textCenterPaint.color = it
+                textPaint.color = it
+            }
+
+            typeArray.getResourceId(
+                R.styleable.cc_line_cc_font_family,
+                0
+            ).let {
+                if (it == 0) return@let
+                val font = ResourcesCompat.getFont(context, it)
+                textCenterPaint.typeface = font
+                textPaint.typeface = font
+            }
+
+        } finally {
+            typeArray.recycle()
+        }
+    }
+
+    fun setFontFamily(font: Typeface) {
+        textCenterPaint.typeface = font
+        textPaint.typeface = font
+    }
+
+    fun setTextSize(size: Float) {
+        textCenterPaint.textSize = context.dpToPx(size)
+        textPaint.textSize = context.dpToPx(size)
+    }
+
+    fun setLineSize(size: Float) {
+        linePaint.strokeWidth = context.dpToPx(size)
+    }
+
+    fun setNodeSize(size: Float) {
+        nodePaint.strokeWidth = context.dpToPx(size)
+    }
+
+    fun setTextColor(color: Int) {
+        textCenterPaint.color = color
+        textPaint.color = color
+    }
+
+/*
+ The client can use this method to set data in graphs
+ Note: The source instance of using this method is available
+ in the `FakeGenerator` object.
+ */
 
     fun setData(
-        graphList: List<Graph>,
-        nameList: List<String>,
+        lineList: List<Line>,
+        intervalList: List<String>,
         rangeList: List<String>
     ) {
-        this.graphList = graphList
-        this.nameList = nameList
+        this.lineList = lineList
+        this.titleList = intervalList
         this.rangeList = rangeList
 
         invalidate()
@@ -125,8 +187,8 @@ class ChainChartView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        //
-        if (graphList.isEmpty()) {
+        //work only in editable mode
+        if (isInEditMode && lineList.isEmpty()) {
             setData(
                 FakeGenerator.generate(),
                 FakeGenerator.nameList,
@@ -140,7 +202,7 @@ class ChainChartView @JvmOverloads constructor(
           This code finds the largest graph based on the number of nodes,
            then divides it based on this graph.
          */
-        graphList.getMaxGraph()?.let {
+        lineList.getMaxGraph()?.let {
             for (index in it.nodeList.indices) {
                 splitList.add(it.getGraphX(index))
             }
@@ -151,7 +213,7 @@ class ChainChartView @JvmOverloads constructor(
            then converts this range to float size
            and is used for padding
          */
-        rangeList.map { it.length }.maxOrNull()?.let {
+        rangeList.map { it.length }.max()?.let {
             maxLeftMargin = minLeftMargin + (it + 110).toFloat()
         }
 
@@ -159,20 +221,20 @@ class ChainChartView @JvmOverloads constructor(
           This code finds the largest title in the graph
            and converts this title to a float size
          */
-        graphList.map { it.title.getSize() }.maxOrNull()?.let {
+        lineList.map { it.title.getSize() }.max()?.let {
             maxGraphTitleSize = it
         }
 
         //This code finds the largest node among all graphs
-        graphList.flatMap { it.nodeList }.max()?.let {
+        lineList.flatMap { it.nodeList }.max()?.let {
             maxNode = it
         }
 
-        graphList.forEachIndexed { index, graph ->
+        lineList.forEachIndexed { index, graph ->
 
             //Draw title badge
             canvas?.drawCircle(
-                maxLeftMargin + (index * maxGraphTitleSize), topMargin,
+                maxLeftMargin + (index * maxGraphTitleSize), topBottomMargin,
                 10f, badgePaint.apply {
                     color = graph.color
                 }
@@ -182,7 +244,7 @@ class ChainChartView @JvmOverloads constructor(
             canvas?.drawText(
                 graph.title,
                 minLeftMargin + maxLeftMargin + (maxGraphTitleSize * index),
-                topMargin * 2, textPaint
+                topBottomMargin * 2, textPaint
             )
 
             rangeList.reversed().forEachIndexed { index, value ->
@@ -210,29 +272,29 @@ class ChainChartView @JvmOverloads constructor(
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun generateGraph(canvas: Canvas?, graph: Graph) {
-        for (index in (graph.nodeList.indices)) {
+    private fun generateGraph(canvas: Canvas?, line: Line) {
+        for (index in (line.nodeList.indices)) {
 
-            val currentX = graph.getGraphX(index)
-            val currentY = graph.getGraphY(index)
+            val currentX = line.getGraphX(index)
+            val currentY = line.getGraphY(index)
 
-            val name = nameList[index]
+            val name = titleList[index]
 
             //Draw node text
             canvas?.drawText(
-                name, currentX, heightVal - topMargin,
+                name, currentX, heightVal - topBottomMargin,
                 textCenterPaint
             )
 
-            if (index < graph.nodeList.size - 1) {
-                val nextX = graph.getGraphX(index + 1)
-                val nextY = graph.getGraphY(index + 1)
+            if (index < line.nodeList.size - 1) {
+                val nextX = line.getGraphX(index + 1)
+                val nextY = line.getGraphY(index + 1)
 
                 //Draw node line
                 canvas?.drawLine(
                     currentX, currentY, nextX, nextY,
                     linePaint.apply {
-                        color = graph.color
+                        color = line.color
                     }
                 )
             }
@@ -241,14 +303,14 @@ class ChainChartView @JvmOverloads constructor(
 
                 //Draw selected circle
                 canvas?.drawCircle(currentX, currentY, circleRadius,
-                    circlePaint.apply {
-                        color = graph.color
+                    nodePaint.apply {
+                        color = line.color
                     })
 
                 //Draw selected vertical line
                 canvas?.drawLine(
-                    currentX, topMargin * 3, currentX,
-                    heightVal - topMargin * 3,
+                    currentX, topBottomMargin * 3, currentX,
+                    heightVal - topBottomMargin * 3,
                     strokeLinePaint
                 )
             }
@@ -267,28 +329,28 @@ class ChainChartView @JvmOverloads constructor(
     }
 
     //Calculate the width for each node
-    private fun Graph.getGraphX(index: Int): Float {
+    private fun Line.getGraphX(index: Int): Float {
         val w = (widthVal / nodeList.size)
         return (index * w) + (maxLeftMargin)
     }
 
     //Calculate the height for each node
-    private fun Graph.getGraphY(index: Int): Float {
+    private fun Line.getGraphY(index: Int): Float {
         val value = nodeList[index]
         val h = (heightVal - nodeList[index])
-        return h - (topMargin * 4)
+        return h - (topBottomMargin * 4)
     }
 
-    /*
-      Adjust nodes based on height
-      If a node is larger than height, all nodes are rendered in height
-     */
+/*
+  Adjust nodes based on height
+  If a node is larger than height, all nodes are rendered in height
+ */
 
-    private fun Graph.round(): Graph {
+    private fun Line.round(): Line {
         if (maxNode < heightVal)
             return this
 
-        val nav = (maxNode - (heightVal - topMargin * 7))
+        val nav = (maxNode - (heightVal - topBottomMargin * 7))
         val nav2 = (maxNode / nav)
         nodeList = nodeList.map { it - (it / nav2) }
 
@@ -297,7 +359,7 @@ class ChainChartView @JvmOverloads constructor(
 
     //This method finds the distance between the range elements
     private fun getRangeYVal(index: Int): Float {
-        val h = (heightVal / rangeList.size) - (topMargin)
-        return (h * index) + (topMargin * 3.5f)
+        val h = (heightVal / rangeList.size) - (topBottomMargin)
+        return (h * index) + (topBottomMargin * 3.5f)
     }
 }

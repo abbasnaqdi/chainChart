@@ -4,14 +4,15 @@
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/oky2abbas/reactor)
 [![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)](https://github.com/oky2abbas/reactor)
 
-**Chain Chart View** is a 
-
+**Chain Chart X is a library for displaying chain and line charts, the idea of this library came to my mind from Google Analytics.**
 
 [![Donate](https://img.shields.io/badge/Donate-green)](https://idpay.ir/oky2abbas)
 
-**Bitcoin (BTC) Donate: `bc1qhgvnx2nfzr0qep5fnsevyyn59k32wpe7q0c7nh`**
+**Bitcoin (BTC) Donate: `1HPZyUP9EJZi2S87QrvCDrE47qRV4i5Fze`**
 
-**Ethereum (ETH) Donate: `0x0dA44bbcc2d7BBF11eb070A81CB24c4eE7Bf1AD9`**
+**Ethereum (ETH) Donate: `0x4a4b0A26Eb31e9152653E4C08bCF10f04a0A02a9`**
+
+**Tron (TRX) Donate: `TAewZVAD4eKjPo9uJ5TesxJUrXiBtVATsK`**
 
 
 

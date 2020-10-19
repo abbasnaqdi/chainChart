@@ -2,7 +2,7 @@
 
 [![](https://jitpack.io/v/naqdi/reactor.svg)](https://jitpack.io/#dfmAbbas/reactor)
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/naqdi/reactor)
-[![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)](https://github.com/naqdi/reactor)
+[![API](https://img.shields.io/badge/API-17%2B-blue.svg?style=flat)](https://github.com/naqdi/reactor)
 
 **Chain Chart View** is a 
 
@@ -18,7 +18,7 @@
 
 ##### Getting Started :
 
-Add to your root build.gradle :Ï
+Add to your root build.gradle :
 
 ```java
 allprojects {
@@ -33,7 +33,7 @@ Add the dependency :
 
 ```java
 dependencies {
-    implementation 'com.github.naqdi:chart:1.0.0'
+    implementation 'com.github.naqdi:chart:0.9.0'
 }
 ```
 

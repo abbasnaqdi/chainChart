@@ -23,7 +23,7 @@
 
 Add to your root build.gradle :
 
-```java
+```groovy
 allprojects {
   repositories {
       ...
@@ -34,7 +34,7 @@ allprojects {
 
 Add the dependency :
 
-```java
+```groovy
 dependencies {
     implementation 'com.github.oky2abbas:chain-chart:0.9.1'
 }
@@ -46,7 +46,7 @@ dependencies {
 
 In `XML` :
 
-```XML 
+```xml 
 <com.naqdi.chart.ChainChartView
 		android:id="@+id/chainChartView"
 		android:layout_width="match_parent"
@@ -57,34 +57,36 @@ In `XML` :
 In `Code` :
 
 ```java
-	val intervalList = listOf("Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-  val rangeList = listOf("0-1K", "100K", "200K", "500K")
-  val lineList = arrayListOf<Line>().apply {
-    add(Line("Line 1", Color.BLUE, listOf(10f, 280f, 88f, 70f, 23f, 33f)))
-    add(Line("Line 2", Color.RED, listOf(300f, 40f, 38f, 180f, 403f, 201f)))
-  }
+val intervalList = listOf("Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+val rangeList = listOf("0-1K", "100K", "200K", "500K")
+val lineList = arrayListOf<Line>().apply {
+	add(Line("Line 1", Color.BLUE, listOf(10f, 280f, 88f, 70f, 23f, 33f)))
+	add(Line("Line 2", Color.RED, listOf(300f, 40f, 38f, 180f, 403f, 201f)))
+}
 
-  chainChartView.setData(lineList, intervalList, rangeList)
+chainChartView.setData(lineList, intervalList, rangeList)
 ```
 
 ##### Customazation :
 
-```XML 
-		app:cc_line_size="3dp"										//size as dp
-		app:cc_node_size="3dp"										//size as dp
-    app:cc_text_size="11sp"										//size as sp
-		app:cc_text_color="#000000"								//color as int or resource id
-    app:cc_font_family="@font/font_name"			//font as resource id
+```xml 
+app:cc_line_size="3dp"	//size as dp
+app:cc_node_size="3dp"	//size as dp
+app:cc_text_size="11sp"	//size as sp
+app:cc_text_color="#000000"	//color as int or resource id
+app:cc_font_family="@font/font_name"	//font as resource id
 ```
 
 In `Code` :
 
 ```java
-	chainChartView.setLineSize(3f)							// size as dp
- 	chainChartView.setNodeSize(8F) 							//size as dp
-  chainChartView.setTextSize(11f)							// size as sp
-  chainChartView.setTextColor(Color.GRAY) 		//color as int
-  chainChartView.setFontFamily(font_family)		//font as typeface
+chainChartView.apply{
+	setLineSize(3f)	// size as dp
+	setNodeSize(8F)	//size as dp
+	setTextSize(11f)	// size as sp
+	setTextColor(Color.GRAY)	//color as int
+	setFontFamily(font_family)	//font as typeface
+}
 ```
 
 ##### Licenses

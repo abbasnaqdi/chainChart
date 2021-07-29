@@ -213,7 +213,7 @@ class ChainChartView @JvmOverloads constructor(
            then converts this range to float size
            and is used for padding
          */
-        rangeList.map { it.length }.max()?.let {
+        rangeList.map { it.length }.maxOrNull()?.let {
             maxLeftMargin = minLeftMargin + (it + 110).toFloat()
         }
 
@@ -221,12 +221,12 @@ class ChainChartView @JvmOverloads constructor(
           This code finds the largest title in the graph
            and converts this title to a float size
          */
-        lineList.map { it.title.getSize() }.max()?.let {
+        lineList.map { it.title.getSize() }.maxOrNull()?.let {
             maxGraphTitleSize = it
         }
 
         //This code finds the largest node among all graphs
-        lineList.flatMap { it.nodeList }.max()?.let {
+        lineList.flatMap { it.nodeList }.maxOrNull()?.let {
             maxNode = it
         }
 
